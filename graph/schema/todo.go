@@ -1,6 +1,7 @@
 package schema
 
 import (
+	"simple-graphql-go/graph/models"
 	"simple-graphql-go/graph/resolvers"
 
 	"github.com/graphql-go/graphql"
@@ -21,6 +22,20 @@ var todoType = graphql.NewObject(
 			},
 			"done": &graphql.Field{
 				Type: graphql.Boolean,
+			},
+			"user": &graphql.Field{
+				Type: userType,
+				Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+					todo, ok := params.Source.(models.Todo)
+					if ok {
+						return resolvers.GetUserByID(graphql.ResolveParams{
+							Args: map[string]interface{}{
+								"id": todo.UserID,
+							},
+						})
+					}
+					return nil, nil
+				},
 			},
 		},
 	},

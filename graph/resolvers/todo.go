@@ -4,10 +4,7 @@ import (
 	"simple-graphql-go/graph/models"
 
 	"github.com/graphql-go/graphql"
-	"gorm.io/gorm"
 )
-
-var DB *gorm.DB
 
 func GetTodos(params graphql.ResolveParams) (interface{}, error) {
 	var todos []models.Todo

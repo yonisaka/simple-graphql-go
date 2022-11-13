@@ -16,9 +16,11 @@ func main() {
 	/**
 	Get (read) todo by id
 	http://localhost:8080/todo?query={todo(id:1){id,text,done}}
+	http://localhost:8080/todo?query={todo(id:1){id,text,done,user{id,name}}}
 
 	Get (read) todo list
 	http://localhost:8080/todo?query={list{id,text,done}}
+	http://localhost:8080/todo?query={list{id,user_id,text,done,user{id,name}}}
 
 	Create todo
 	http://localhost:8080/todo?query=mutation+_{create(text:"Todo Test",user_id:1,done:false){id,text,done}}
